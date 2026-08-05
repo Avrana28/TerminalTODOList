@@ -1,23 +1,18 @@
 #include "linked_list.h"
 #include "my_strlib.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 struct Node* add_node(struct Node* head, char task[256]){
   if (head == NULL){
-    printf("You passed an empty List");
-    return NULL;
+    return create_node(task);
   }
   if (head->next == NULL) {
-    struct Node* new = malloc(sizeof(struct Node));
-    if (new == NULL){
-      printf("Failed to allocate memory");
-      return NULL;
-    }
-    head->next = new;
+    head->next = create_node(task);
     return head;
   }
-  add_node(head->next, task);
+  return add_node(head->next, task);
 }
 
 struct Node* delete_node(struct Node* head, char task[256]){
@@ -47,6 +42,16 @@ struct Node* delete_node(struct Node* head, char task[256]){
   }
 }
 
+struct Node* create_node(char* task){
+  struct Node* new = calloc(1, sizeof(struct Node));
+  if (new == NULL){
+    printf("Failed to allocate memory");
+    return NULL;
+  }
+  my_strcpy(new->task, task);
+
+  return new;
+}
 
 void list_nodes(struct Node* head){
   if (head == NULL){
@@ -58,4 +63,15 @@ void list_nodes(struct Node* head){
     return;
   }
   list_nodes(head->next);
+}
+
+void free_list(struct Node* head){
+  if (head == NULL){
+    return;
+  }
+  struct Node* next = head->next;
+
+  free(head);
+
+  free_list(next);
 }
