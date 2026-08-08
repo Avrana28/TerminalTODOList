@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.15)
 project(TODO-List C)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_library(my_linked_list libs/linked_list.c)
 
 add_library(my_strlib libs/my_strlib.c)

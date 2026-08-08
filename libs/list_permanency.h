@@ -1,6 +1,7 @@
 #ifndef PERMANENT_LISTS
 #define PERMANENT_LISTS
-#include "linked_ist.h"
+#include "linked_list.h"
+#include <stdio.h>
 
 FILE* create_list(char* file_name);
 

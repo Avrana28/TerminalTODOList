@@ -3,8 +3,8 @@
 #include "linked_list.h"
 
 FILE* create_list(char* file_name) {
-  char* file_path[263];
-  snprintf(file_path, sizeof(file_path), ".lists/[%s]", file_name);
+  char file_path[263];
+  snprintf(file_path, sizeof(file_path), ".lists/%s", file_name);
   FILE* fptr = fopen(file_path, "wb");
   if (fptr == NULL) {
     fprintf(stderr, "Unable to open the file");
